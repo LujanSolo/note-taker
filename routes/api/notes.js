@@ -28,3 +28,11 @@ router.get("/notes", async (req, res) => {
     }
   })
 });
+
+//todo CREATE POST ROUTE FOR /api/notes
+
+
+
+
+//todo BONUS: create DELETE POST for /api/notes/:id
+
