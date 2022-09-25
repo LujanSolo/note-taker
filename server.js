@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const express = require('express');
+// const express = require('express');
 const path = require('path');
 
 const api = require('./routes');
@@ -22,7 +22,7 @@ router.get("/", (req, res) =>
 );
 
 //* GET route for notes page
-router.get("/notes", function (req, res) =>
+router.get("/notes", (req, res) =>
   res.sendFile(path.join(__dirname, 'public/notes.html'))
 );
 
