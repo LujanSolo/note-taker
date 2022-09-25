@@ -17,3 +17,13 @@ router.get("/", async (req, res) => {
 
 
 //TODO DISPLAY NOTES.HTML
+router.get("/notes", async (req, res) => {
+
+  fs.readFile("./db/db.json", "utf8", (err,data)=> {
+    if(err){
+      res.json(err);
+    } else {
+      
+    }
+  })
+})
