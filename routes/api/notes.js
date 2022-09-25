@@ -30,7 +30,28 @@ router.get("/notes", async (req, res) => {
 });
 
 //todo CREATE POST ROUTE FOR /api/notes
+router.post("/notes", async (req,res) => {
 
+  fs.readFile("./db/db.json", "utf8", (err, data) => {
+    if(err){
+      res.json(err);
+    } else{
+      const newNote = req.body;
+      const notes = JSON.parse(data)
+      notes.push(newNote);
+
+      fs.writeFile("./db/db.json", JSON.stringify(notes, null, "\t"), (err) => {
+        if(err){
+          res.json(err)
+        }else{
+          res.json(notes);
+        }
+      })
+    }
+  })
+});
+
+module.exports = router;
 
 
 
