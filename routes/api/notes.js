@@ -1,15 +1,6 @@
 const router = require('express').Router();
-const path = require('path');
+
 const fs = require('fs');
-
-router.get("/api", (req, res) => {
-  res.sendFile(path.join(__dirname, '/public/index.html')
-  )
-});
-
-router.get("/api/notes", (req, res) => {
-  res.sendFile(path.join(__dirname, '/public/notes.html'))
-});
 
 //todo DISPLAY THE INDEX.HTML
 router.get("/", async (req, res) => {
@@ -25,7 +16,7 @@ router.get("/", async (req, res) => {
 });
 
 //TODO DISPLAY NOTES.HTML
-router.get("/", async (req, res) => {
+router.get("./notes", async (req, res) => {
 
   fs.readFile("./db/db.json", "utf8", (err, data) => {
     if (err) {
@@ -45,7 +36,7 @@ router.post("/", async (req, res) => {
       res.json(err);
     } else {
       const newNote = req.body;
-      const notes = JSON.parse(data)
+      const notes = JSON.parse(data) //*need to add id to delete
       notes.push(newNote);
 
       fs.writeFile("./db/db.json", JSON.stringify(notes, null, "\t"), (err) => {
@@ -62,7 +53,7 @@ router.post("/", async (req, res) => {
 
 //todo BONUS: create DELETE POST for /api/notes/:id
 router.delete('/:id', (req, res) => {
-  Note.destroy({
+  note.destroy({
     where: {
       id: req.params.id,
     },
