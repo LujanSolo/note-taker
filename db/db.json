@@ -4,15 +4,15 @@
 		"text": "Test text"
 	},
 	{
-		"name": "yo yo yo",
-		"newNote": "heya"
+		"title": "Headliner",
+		"text": "Hey you, ..."
 	},
 	{
-		"name": "yo yo yo",
-		"newNote": "BOOOOGA"
+		"name": "etc",
+		"text": "whatever"
 	},
 	{
-		"name": "Hi",
-		"newNote": "Btotalslaskjdfl"
+		"name": "etc",
+		"text": "BLAH BLAH BLAH"
 	}
 ]

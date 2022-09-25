@@ -1,6 +1,15 @@
 const router = require('express').Router();
-
+const path = require('path');
 const fs = require('fs');
+
+router.get("/api", (req, res) => {
+  res.sendFile(path.join(__dirname, '/public/index.html')
+  )
+});
+
+router.get("/api/notes", (req, res) => {
+  res.sendFile(path.join(__dirname, '/public/notes.html'))
+});
 
 //todo DISPLAY THE INDEX.HTML
 router.get("/", async (req, res) => {
@@ -9,8 +18,8 @@ router.get("/", async (req, res) => {
     if (err) {
       res.json(err);
     } else {
-      const index = JSON.parse(data)
-      res.json(index);
+      const storedNotes = JSON.parse(data)
+      res.json(storedNotes);
     }
   })
 });
