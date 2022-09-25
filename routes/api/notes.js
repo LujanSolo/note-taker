@@ -38,7 +38,7 @@ router.post("/", async (req, res) => {
     } else {
       const newNote = req.body.id;
       const notes = JSON.parse(data)
-       //*need to add id to delete
+      //*need to add id to delete
       notes.push(newNote);
 
       fs.writeFile("./db/db.json", JSON.stringify(notes, null, "\t"), (err) => {
@@ -60,10 +60,7 @@ router.delete('/api/notes/:id', (req, res) => {
   //todo if req.params.id is TRUTHY, then read the db.json and parse it into a variable. then need a for loop of some kind
   //todo go thru the index of notes data and if params.id === id of note, then SPLICE out that id
   //todo then STRINGIFY the data back to the db.json
-  Note.delete (id, (err) => {
-    if (err) return next(err);
-    res.send({ message: 'Deleted'});
-  });
+ 
 });
 
 module.exports = router;
