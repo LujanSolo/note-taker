@@ -1,6 +1,7 @@
 const router = require('express').Router();
 
 const fs = require('fs');
+const { nextTick } = require('process');
 
 //todo DISPLAY THE INDEX.HTML
 router.get("/", async (req, res) => {
@@ -35,8 +36,9 @@ router.post("/", async (req, res) => {
     if (err) {
       res.json(err);
     } else {
-      const newNote = req.body;
-      const notes = JSON.parse(data) //*need to add id to delete
+      const newNote = req.body.id;
+      const notes = JSON.parse(data)
+       //*need to add id to delete
       notes.push(newNote);
 
       fs.writeFile("./db/db.json", JSON.stringify(notes, null, "\t"), (err) => {
@@ -52,16 +54,16 @@ router.post("/", async (req, res) => {
 
 
 //todo BONUS: create DELETE POST for /api/notes/:id
-router.delete('/:id', (req, res) => {
-  note.destroy({
-    where: {
-      id: req.params.id,
-    },
-  })
-    .then((deletedNote) => {
-      res.json(deletedNote);
-    })
-    .catch((err) => res.json(err));
+//* must READ THE DATA FROM THE ARRAY IN DB.JSON, DELETE BY ID THERE, THEN RETURN THE RESULTS
+router.delete('/api/notes/:id', (req, res) => {
+  const id = req.params.id;
+  //todo if req.params.id is TRUTHY, then read the db.json and parse it into a variable. then need a for loop of some kind
+  //todo go thru the index of notes data and if params.id === id of note, then SPLICE out that id
+  //todo then STRINGIFY the data back to the db.json
+  Note.delete (id, (err) => {
+    if (err) return next(err);
+    res.send({ message: 'Deleted'});
+  });
 });
 
 module.exports = router;
