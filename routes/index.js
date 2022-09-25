@@ -1,22 +1,7 @@
 const router = require('express').Router();
 
-const apiRoutes = require('./api');
+const notesRouter = require('./notes');
 
-router.use('/api', apiRoutes);
-
-const path = require('path');
-
-router.get("*", function(req, res) {
-  res.sendFile(path.join(__dirname, "public/index.html"));
-});
-
-router.get("/", function(req, res) {
-  res.sendFile(path.join(__dirname, "public/index.html"));
-});
-
-router.get("/notes", function(req, res) {
-  res.sendFile(path.join(__dirname, "public/notes.html"));
-});
-
+router.use('/notes', notesRouter);
 
 module.exports = router;
