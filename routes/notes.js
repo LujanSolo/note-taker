@@ -1,4 +1,4 @@
-const notes = require('express').Router();
+const router = require('express').Router();
 const { v4: uuidv4 } = require('uuid');
 const {
   readFromFile,
@@ -7,70 +7,69 @@ const {
 } = require('../../helpers/fsUtils');
 
 //* GET route for fetching the INDEX
-notes.get("/", (req, res) => {
+router.get('/', (req, res) => {
   readFromFile('./db/db.json')
-  .then((data) =>
-  res.json(JSON.parse(data))
-  );
- 
-  
-//* GET route for fetching NOTES
-notes.get('/notes', (req, res) => {
-  readFromFile('./db/db.json')
-  .then(data) =>
-  res.json(JSON.parse(data))
+    .then((data) =>
+      res.json(JSON.parse(data))
+    );
 });
 
-//* GET route to get notes by a specific ID
-notes.get('/notes/:id', (req, res) => {
-  const noteId = req.params.id;
+
+  //* GET route for fetching NOTES
+router.get('/notes', (req, res) => {
   readFromFile('./db/db.json')
-  .then ((data) => JSON.parse(data))
-  .then ((json) => {
-    const result = json.filter((note) => note.id === noteId);
-    return result.length > 0
-    ? res.json(result)
-    : res.json('No note with that ID');
-  });
+    .then((data) =>
+      res.json(JSON.parse(data))
+    );
 });
 
-notes.delete('/notes/:id', (req, res) => {
-  const noteId = req.params.id;
-  readFromFile('./db/db.json')
-    .then((data) => JSON.parse(data))
-    .then((json) => {
-      // Make a new array of all notes except the one with the ID provided in the URL
-      const result = json.filter((note) => note.id !== noteId);
-
-      // Save that array to the filesystem
-      writeToFile('./db/db.json', result);
-
-      // Respond to the DELETE request
-      res.json(`Item ${id} has been deleted 🗑️`);
-    });
+  //* GET route to get notes by a specific ID
+router.get('/notes/:id', (req, res) => {
+    const noteId = req.params.id;
+    readFromFile('./db/db.json')
+      .then((data) => JSON.parse(data))
+      .then((json) => {
+        const result = json.filter((note) => note.id === noteId);
+        return result.length > 0
+          ? res.json(result)
+          : res.json('No note with that ID');
+      });
 });
 
-//* POST ROUTE FOR /api/notes
-notes.post('/notes', (req, res) => {
-  console.log(req.body);
+router.delete('/notes/:id', (req, res) => {
+    const noteId = req.params.id;
+    readFromFile('./db/db.json')
+      .then((data) => JSON.parse(data))
+      .then((json) => {
+        // Make a new array of all notes except the one with the ID provided in the URL
+        const result = json.filter((note) => note.id !== noteId);
 
-  const { title, text } = req.body;
+        // Save that array to the filesystem
+        writeToFile('./db/db.json', result);
 
-  if (req.body) {
-    const newNote = {
-      title,
-      text,
-      id: uuidv4(),
-    };
+        // Respond to the DELETE request
+        res.json(`Item ${id} has been deleted 🗑️`);
+      });
+});
 
-    readAndAppend(newNote, './db/db.json');
-    res.json(`Note added successfullly`);
-  } else {
-    res.error('Error in adding note');
+  //* POST ROUTE FOR /api/notes
+router.post('/notes', (req, res) => {
+    console.log(req.body);
+
+    const { title, text } = req.body;
+
+    if (req.body) {
+      const newNote = {
+        title,
+        text,
+        id: uuidv4(),
+      };
+
+      readAndAppend(newNote, './db/db.json');
+      res.json(`Note added successfully`);
+    } else {
+      res.error('Error in adding note');
   }
 });
 
-module.exports = notes;
-
-
-
+module.exports = router;
