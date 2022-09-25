@@ -1,4 +1,5 @@
 const notes = require('express').Router();
+const { v4: uuidv4 } = require('uuid');
 const {
   readFromFile,
   readAndAppend,
@@ -21,25 +22,39 @@ notes.get('/notes', (req, res) => {
 });
 
 //* GET route to get notes by a specific ID
-notes.get('/:id', (req, res) => {
-  const prevNote = req.params.id;
+notes.get('/notes/:id', (req, res) => {
+  const noteId = req.params.id;
   readFromFile('./db/db.json')
   .then ((data) => JSON.parse(data))
   .then ((json) => {
-    const result = json.filter((note) => note.id === id);
+    const result = json.filter((note) => note.id === noteId);
     return result.length > 0
     ? res.json(result)
     : res.json('No note with that ID');
   });
 });
 
+notes.delete('/notes/:id', (req, res) => {
+  const noteId = req.params.id;
+  readFromFile('./db/db.json')
+    .then((data) => JSON.parse(data))
+    .then((json) => {
+      // Make a new array of all notes except the one with the ID provided in the URL
+      const result = json.filter((note) => note.id !== noteId);
 
+      // Save that array to the filesystem
+      writeToFile('./db/db.json', result);
 
-//todo CREATE POST ROUTE FOR /api/notes
-notes.post('/', (req, res) => {
+      // Respond to the DELETE request
+      res.json(`Item ${id} has been deleted 🗑️`);
+    });
+});
+
+//* POST ROUTE FOR /api/notes
+notes.post('/notes', (req, res) => {
   console.log(req.body);
 
-  const { note } = req.body;
+  const { title, text } = req.body;
 
   if (req.body) {
     const newNote = {
