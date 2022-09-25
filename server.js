@@ -1,31 +1,28 @@
-const router = require('express').Router();
-// const express = require('express');
+const express = require('express');
 const path = require('path');
 
 const api = require('./routes');
 
-
-// const app = express();
-
 const PORT = process.env.PORT || 3001;
 
+const app = express();
 //* Middleware for parsing JSON and url encoded form data
-router.use(express.json());
-router.use(express.urlencoded({ extended: true }));
-router.use('/api', api)
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use('/api', api)
 
-router.use(express.static('public'));
+app.use(express.static('public'));
 
-//* GET route for the homepage
-router.get("/", (req, res) =>
+//* GET route for the index
+app.get("/", (req, res) =>
   res.sendFile(path.join(__dirname, '/public/index.html'))
 );
 
 //* GET route for notes page
-router.get("/notes", (req, res) =>
+app.get("/notes", (req, res) =>
   res.sendFile(path.join(__dirname, 'public/notes.html'))
 );
 
-router.listen(PORT, () => 
+app.listen(PORT, () => 
   console.log(`Server now running at http://localhost:${PORT} 🚀`)
 );
