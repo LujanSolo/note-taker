@@ -18,13 +18,12 @@ Note Taker is a simple application that uses Node and Express.js to save, retrie
 - [Installation](#installation)
 - [Usage](#usage)
 - [Screenshots](#screenshots)
-- [Tests](#tests)
 - [License](#license)
 - [Questions](#questions)
 
 ## Installation
 
-No installation necessary. Simply visit the Heroku-hosted website at  https://lujan-notetaker-app.herokuapp.com/ to get started!
+No installation necessary. Simply visit the [Heroku-hosted website](https://lujan-notetaker-app.herokuapp.com/) to get started!
 
 ## Usage
 
@@ -32,14 +31,14 @@ Once you've navigated to the [Note-Taker App](https://lujan-notetaker-app.heroku
 
 ## Screenshots
 
-N/A
+The following images show the web application's appearance and functionality:
 
-## Tests
-
-N/A
+![gif detailing functionality of app](/images/Note%20Taker.gif)
+![Starting page for notes with a single entry. Form has + button to add a new note, title fields, text fields, and a column with existing note(s), each with its own delete button.](/images/noteTaker3.png)
+![image showing note with deleted option](/images/noteTaker1.png)
+![initial note added to app's main page](/images/noteTaker2.png)
 
 ## License
-
 
 This project is covered under the [Mozilla Public 2.0 License](https://opensource.org/licenses/MPL-2.0).
 
@@ -49,4 +48,3 @@ This project is covered under the [Mozilla Public 2.0 License](https://opensourc
 GitHub profile: http://github.com/LujanSolo
 
 Contact me at lujansolo@proton.me for additional inquiries.
-er
