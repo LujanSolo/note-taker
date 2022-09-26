@@ -23,6 +23,7 @@ app.get("/notes", (req, res) =>
   res.sendFile(path.join(__dirname, 'public/notes.html'))
 );
 
+//* Spin up the server!
 app.listen(PORT, () => 
   console.log(`Server now running at http://localhost:${PORT} 🚀`)
 );

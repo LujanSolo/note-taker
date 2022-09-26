@@ -2,5 +2,10 @@
     {
         "title": "Test Title",
         "text": "Test text"
+    },
+    {
+        "title": "Another Test Note",
+        "text": "1. With example text\n2. And another line\nor more...!",
+        "id": "076fc300-0847-48fa-9085-d15e6bfdd3e8"
     }
 ]
