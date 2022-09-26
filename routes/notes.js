@@ -1,4 +1,4 @@
-const router = require('express').Router();
+const notes = require('express').Router();
 const { v4: uuidv4 } = require('uuid');
 const {
   readFromFile,
@@ -7,7 +7,7 @@ const {
 } = require('../helpers/fsUtils.js');
 
 //* GET route for fetching the front page
-router.get('/', (req, res) => {
+notes.get('/', (req, res) => {
   readFromFile('./db/db.json')
     .then((data) =>
       res.json(JSON.parse(data))
@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
 
 
 //* GET route for fetching NOTES
-router.get('/notes', (req, res) => {
+notes.get('/notes', (req, res) => {
   readFromFile('./db/db.json')
     .then((data) =>
       res.json(JSON.parse(data))
@@ -24,7 +24,7 @@ router.get('/notes', (req, res) => {
 });
 
 //* GET route to get notes by a specific ID
-router.get('/notes/:id', (req, res) => {
+notes.get('/notes/:id', (req, res) => {
   const noteId = req.params.id;
   readFromFile('./db/db.json')
     .then((data) => JSON.parse(data))
@@ -36,7 +36,7 @@ router.get('/notes/:id', (req, res) => {
     });
 });
 
-router.delete('/notes/:id', (req, res) => {
+notes.delete('/notes/:id', (req, res) => {
   const noteId = req.params.id;
   readFromFile('./db/db.json')
     .then((data) => JSON.parse(data))
@@ -53,7 +53,7 @@ router.delete('/notes/:id', (req, res) => {
 });
 
 //* POST ROUTE FOR /api/notes
-router.post('/', (req, res) => {
+notes.post('/', (req, res) => {
   console.log(req.body);
 
   const { title, text } = req.body;
@@ -72,4 +72,4 @@ router.post('/', (req, res) => {
   }
 });
 
-module.exports = router;
+module.exports = notes;
